@@ -11,6 +11,10 @@
                 <FileResource description="" file="missionsafety.ide.css" isDevelopment="true" isRuntime="false" type="CSS"/>
                 <FileResource description="" file="missionsafety.runtime.js" isDevelopment="false" isRuntime="true" type="JS"/>
                 <FileResource description="" file="missionsafety.runtime.css" isDevelopment="false" isRuntime="true" type="CSS"/>
+
+                <FileResource description="" file="js/missionsafety.common.js" isDevelopment="true" isRuntime="true" type="JS"/>
+                <FileResource description="" file="js/highcharts.src.js" isDevelopment="true" isRuntime="true" type="JS"/>
+                <FileResource description="" file="js/highcharts-more.src.js" isDevelopment="true" isRuntime="true" type="JS"/>
             </UIResources>
         </Widget>
     </Widgets>

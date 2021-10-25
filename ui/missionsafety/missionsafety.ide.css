@@ -1,9 +1,9 @@
 /* Place custom CSS styling for missionsafety widget in Composer in this file */
 
+/*
 .widget-missionsafety {
 }
 
-/*
 body {
   width: 100vw;
   height: 100vh;
@@ -29,6 +29,7 @@ header span {
 }
 */
 
+/* 
 .widget-content.widget-missionsafety .title {
   width: 54px;
   height: 54px;
@@ -38,7 +39,8 @@ header span {
   width: 100%;
   height: 100%;
   transform: rotate(0deg);
-}
+} 
+*/
 
 /*
   .center image {
@@ -48,6 +50,7 @@ header span {
   }
   */
 
+/* 
 .widget-content.widget-missionsafety .moving image {
   transform: translate(-10px, -30px) rotate(0deg);
   transform-origin: center;
@@ -85,6 +88,7 @@ header span {
   transform-origin: center;
   transform-box: fill-box;
 }
+*/
 
 /*
   .arrow_blue image {
@@ -100,6 +104,7 @@ header span {
   }
   */
 
+/*   
 .widget-content.widget-missionsafety .highcharts-subtitle {
   padding-top: 20px;
 }
@@ -126,4 +131,53 @@ header span {
 
 .widget-content.widget-missionsafety .currentSituation .value.wind {
   color: green;
+} 
+
+*/
+
+/***********************************************************************************************/
+
+.widget-content.widget-missionsafety {
+  width: 100%;
+  height: 100%;
+}
+
+.widget-content.widget-missionsafety div.container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.highcharts-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.widget-content.widget-missionsafety .mission__subtitle div {
+  transform: rotate(90deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 80px;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+}
+
+.widget-content.widget-missionsafety .mission__subtitle div span {
+  transform: rotate(-90deg);
+}
+
+.widget-content.widget-missionsafety .currentSituation {
+  text-align: center;
+}
+
+.widget-content.widget-missionsafety .currentSituation .label {
+  font-size: 16px;
+}
+
+.widget-content.widget-missionsafety .currentSituation .value {
+  font-size: 80px;
 }
