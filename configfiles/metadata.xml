@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entities>
+    <ExtensionPackages>
+        <ExtensionPackage dependsOn="" description="" minimumThingWorxVersion="9.1.0" name="missionsafety" packageVersion="1.0.0" vendor="SJLEE"> 
+        </ExtensionPackage>
+    </ExtensionPackages>
+    <Widgets>
+        <Widget name="missionsafety">
+            <UIResources>
+                <FileResource description="" file="missionsafety.ide.js" isDevelopment="true" isRuntime="false" type="JS"/>
+                <FileResource description="" file="missionsafety.ide.css" isDevelopment="true" isRuntime="false" type="CSS"/>
+                <FileResource description="" file="missionsafety.runtime.js" isDevelopment="false" isRuntime="true" type="JS"/>
+                <FileResource description="" file="missionsafety.runtime.css" isDevelopment="false" isRuntime="true" type="CSS"/>
+            </UIResources>
+        </Widget>
+    </Widgets>
+</Entities>
