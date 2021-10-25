@@ -1,4 +1,7 @@
-lib
-build
-twx-lib
-.settings
+lib/
+build/
+twx-lib/
+.settings/
+bin/
+
+/extension.properties
