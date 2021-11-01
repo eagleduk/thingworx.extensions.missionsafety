@@ -1,32 +1,35 @@
-TW.Runtime.Widgets.missionsafety_movable= function () {
-	var valueElem;
-	this.renderHtml = function () {
-		// return any HTML you want rendered for your widget
-		// If you want it to change depending on properties that the user
-		// has set, you can use this.getProperty(propertyName). In
-		// this example, we'll just return static HTML
-		return 	'<div class="widget-content widget-missionsafety_movable">' +
-					'<span class="missionsafety-movable-property">' + this.getProperty('missionsafety movable Property') + '</span>' +
-				'</div>';
-	};
+TW.Runtime.Widgets.missionsafety_movable = function () {
+  this.renderHtml = function () {
+    return "<div class='widget-content widget-missionsafety_movable' style='display:none;'></div>";
+  };
 
-	this.afterRender = function () {
-		// NOTE: this.jqElement is the jquery reference to your html dom element
-		// 		 that was returned in renderHtml()
+  this.afterRender = function () {
+    this.jqElement.closest(".widget-bounding-box").hide();
+  };
 
-		// get a reference to the value element
-		valueElem = this.jqElement.find('.missionsafety-movable-property');
-		// update that DOM element based on the property value that the user set
-		// in the mashup builder
-		valueElem.text(this.getProperty('missionsafety movable Property'));
-	};
+  this.updateProperty = async function (updatePropertyInfo) {
+    if (updatePropertyInfo.TargetProperty === "input") {
+      const inputs = updatePropertyInfo.RawDataFromInvoke.array;
+      const output = await movable_loaction(inputs);
+      console.log(output);
+      this.setProperty("output", output);
+      this.jqElement.triggerHandler("calculateEnd");
+    }
+  };
 
-	// this is called on your widget anytime bound data changes
-	this.updateProperty = function (updatePropertyInfo) {
-		// TargetProperty tells you which of your bound properties changed
-		if (updatePropertyInfo.TargetProperty === 'missionsafety movable Property') {
-			valueElem.text(updatePropertyInfo.SinglePropertyValue);
-			this.setProperty('missionsafety movable Property', updatePropertyInfo.SinglePropertyValue);
-		}
-	};
+  async function movable_loaction(inputs) {
+    const { default: LatLon } = await import(
+      "../../Common/extensions/missionsafety/ui/missionsafety_movable/js/movable/latlon-spherical.js"
+    );
+
+    const [a] = inputs.shift();
+    const current = new LatLon(a[1], a[0]);
+
+    const result = inputs.map((array) => {
+      return array.map(([lon, lat]) => {
+        return current.destinationPoint(lat, lon);
+      });
+    });
+    return [[current], ...result];
+  }
 };
