@@ -128,6 +128,12 @@ const chart = {
       marker: {
         enabled: true,
       },
+      dataLabels: {
+        enabled: true,
+        color: "white",
+        x: -1,
+        y: 10,
+      },
     },
     arearange: {
       showInLegend: true,
@@ -166,31 +172,52 @@ function renderChart(datas) {
         });
         break;
       case "scatter":
-        datas[type].forEach((data) => {
+        text += `<div class="mission__subtitle">`;
+        style += `.${type} image { transform-origin: center; transform-box: fill-box;}`;
+        style += `.${type} text { transform-origin: center; transform-box: fill-box;}`;
+
+        datas[type].forEach((data, index) => {
           const {
             id,
             data: [[x, y]],
+            marker: { symbol },
           } = data;
-          console.log(id, x, y);
           series.push({
             type,
-            className: `scatter ${id}`,
+            className: `${type} ${id}`,
             ...data,
           });
-          style += `.scatter.${id} image { transform: translate(-30px, -25px) rotate(${
+          style += `.${type}.${id} image { transform: translate(-30px, -25px) rotate(${
             x + 180
           }deg); }`;
-          style += `.scatter.${id} text { transform: rotate(${
+          style += `.${type}.${id} text { transform: rotate(${
             x + (x > 180 ? 0 : 180) + 90
           }deg); }`;
+
+          text += `
+            <div style="background-image: ${symbol}; top: ${index * 50}px">
+              <span>
+                ${id}
+              </span>
+            </div>
+          `;
         });
+
+        text += `</div>`;
         break;
       case "bubble":
         break;
     }
   }
 
-  const newChart = { ...chart, series, subtitle: { text } };
+  const newChart = {
+    ...chart,
+    series,
+    subtitle: {
+      ...chart.subtitle,
+      text,
+    },
+  };
 
   console.log(newChart);
   return {
