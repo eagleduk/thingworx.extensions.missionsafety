@@ -11,7 +11,6 @@ TW.Runtime.Widgets.missionsafety_movable = function () {
     if (updatePropertyInfo.TargetProperty === "input") {
       const inputs = updatePropertyInfo.RawDataFromInvoke.array;
       const output = await movable_loaction(inputs);
-      console.log(output);
       this.setProperty("output", output);
       this.jqElement.triggerHandler("calculateEnd");
     }
