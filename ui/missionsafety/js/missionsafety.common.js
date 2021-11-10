@@ -27,7 +27,7 @@ const chart = {
   animation: false,
   title: {
     text: "Current Situation",
-    subtext: "4",
+    subtext: "0",
     textAlign: "center",
     right: -60,
     bottom: 20,
@@ -45,79 +45,117 @@ const chart = {
     left: 10,
     bottom: 20,
   },
-  polar: {
-    center: ["50%", "50%"],
-  },
+  polar: [
+    {
+      id: "polar1",
+      center: ["50%", "50%"],
+      radius: [25, "90%"],
+    },
+    {
+      id: "polar2",
+      center: ["50%", "50%"],
+      radius: [0, "90%"],
+    },
+  ],
   tooltip: {
     show: false,
   },
-  angleAxis: {
-    type: "value",
-    min: 0,
-    max: 36,
-    margin: 10,
-    axisLabel: {
-      formatter: (value, index) => {
-        value *= 10;
-        let result;
-        if (value === 0) result = "N";
-        else if (value === 90) result = "E";
-        else if (value === 180) result = "S";
-        else if (value === 270) result = "W";
-        else result = value + "°";
-        return " " + result + " ";
+  angleAxis: [
+    {
+      polarIndex: 0,
+      type: "value",
+      min: 0,
+      max: 36,
+      margin: 10,
+      axisLabel: {
+        formatter: (value, index) => {
+          value *= 10;
+          let result;
+          if (value === 0) result = "N";
+          else if (value === 90) result = "E";
+          else if (value === 180) result = "S";
+          else if (value === 270) result = "W";
+          else result = value + "°";
+          return " " + result + " ";
+        },
       },
-      // padding: 10,
-    },
 
-    splitLine: {
-      show: true,
-      lineStyle: {
-        color: "#ddd",
-        // type: "dashed",
+      splitLine: {
+        show: true,
+        lineStyle: {
+          color: "#ddd",
+        },
+        interval: 30,
       },
-      interval: 30,
+      axisLine: {
+        show: true,
+      },
+      zlevel: 1,
+      z: 1,
     },
-    axisLine: {
-      show: true,
+    {
+      polarIndex: 1,
+      type: "value",
+      min: 0,
+      max: 36,
+      margin: 10,
+      axisLabel: {
+        show: false,
+      },
     },
-    zlevel: 1,
-    z: 1,
-    // axisTick: {
-    //   length: 13,
-    // },
-  },
+  ],
 
-  radiusAxis: {
-    type: "value",
-    min: 0,
-    max: 20,
-    interval: 6,
-    axisLabel: {
-      showMaxLabel: false,
-      showMinLabel: false,
-      color: "white",
-      formatter: (value, index) => {
-        // return value;
-        // return value + " NM";
-        return value * 5 + " NM";
+  radiusAxis: [
+    {
+      polarId: "polar1",
+      polarIndex: 0,
+      type: "value",
+      min: 0,
+      max: 20,
+      interval: 6,
+      axisLabel: {
+        showMaxLabel: false,
+        showMinLabel: false,
+        color: "white",
+        formatter: (value, index) => {
+          return value * 5 + " NM";
+        },
+        align: "center",
+        overflow: "truncate",
+        lineOverflow: "truncate",
       },
-      align: "center",
-      overflow: "truncate",
-      lineOverflow: "truncate",
+      splitLine: {
+        show: true,
+      },
+      axisLine: {
+        show: false,
+      },
+      axisTick: {
+        show: false,
+      },
+      zlevel: 1,
+      z: 1,
     },
-    splitLine: {
-      show: true,
+    {
+      polarId: "polar2",
+      polarIndex: 1,
+      type: "value",
+      min: 0,
+      max: 20,
+      axisLabel: {
+        show: false,
+      },
+      splitLine: {
+        show: false,
+      },
+      axisLine: {
+        show: false,
+      },
+      axisTick: {
+        show: false,
+      },
     },
-    axisLine: {
-      show: false,
-    },
-    axisTick: {
-      show: false,
-    },
-    zlevel: 1,
-    z: 1,
-  },
+  ],
   graphic: [
     {
       type: "group",
@@ -136,7 +174,7 @@ const chart = {
         {
           type: "text",
           x: 25,
-          y: 18,
+          y: -15,
           style: {
             fill: "#fff",
             text: "Wave",
@@ -162,7 +200,7 @@ const chart = {
         {
           type: "text",
           x: 25,
-          y: 18,
+          y: -15,
           style: {
             fill: "#fff",
             text: "Current",
@@ -188,7 +226,7 @@ const chart = {
         {
           type: "text",
           x: 25,
-          y: 18,
+          y: -15,
           style: {
             fill: "#fff",
             text: "Wind",
@@ -197,6 +235,160 @@ const chart = {
         },
       ],
     },
+    {
+      id: "main",
+      type: "image",
+      style: {
+        image:
+          "../Common/extensions/missionsafety/ui/missionsafety/images/main.png",
+        width: 50,
+        height: 50,
+      },
+      left: "center",
+      top: "middle",
+      rotation: 0,
+      z: 5,
+    },
   ],
-  series: [],
+  series: [
+    {
+      id: "state1",
+      type: "custom",
+      coordinateSystem: "polar",
+      itemStyle: {
+        color: "brown",
+      },
+      renderItem,
+      silent: true,
+    },
+    {
+      id: "state2",
+      type: "custom",
+      coordinateSystem: "polar",
+      itemStyle: {
+        color: "orange",
+      },
+      renderItem,
+      silent: true,
+    },
+    {
+      id: "state3",
+      type: "custom",
+      coordinateSystem: "polar",
+      itemStyle: {
+        color: "green",
+      },
+      renderItem,
+      silent: true,
+    },
+    {
+      id: "main",
+      type: "effectScatter",
+      coordinateSystem: "polar",
+      symbolSize: 50,
+      symbolRotate: 0,
+      showEffectOn: "emphasis",
+      polarIndex: 1,
+      data: [
+        {
+          value: [0, 0],
+          symbol:
+            "image://../Common/extensions/missionsafety/ui/missionsafety/images/main.png",
+        },
+      ],
+      label: {
+        show: false,
+      },
+      silent: true,
+      zlevel: 10,
+      z: 10,
+    },
+    {
+      id: "forecast",
+      polarIndex: 0,
+      type: "effectScatter",
+      coordinateSystem: "polar",
+      symbolSize: 40,
+      symbolRotate: 0,
+      showEffectOn: "emphasis",
+      symbol:
+        "image://../Common/extensions/missionsafety/ui/missionsafety/images/moving.png",
+      data: [],
+      silent: true,
+      zlevel: 10,
+      z: 10,
+      // z: 3,
+    },
+    {
+      id: "route",
+      type: "line",
+      coordinateSystem: "polar",
+      showSymbol: false,
+      itemStyle: {
+        color: "red",
+      },
+      data: [],
+      lineStyle: {
+        width: 4,
+        type: "dashed",
+      },
+      silent: true,
+      zlevel: 10,
+      z: 10,
+    },
+    {
+      id: "wave",
+      type: "scatter",
+      coordinateSystem: "polar",
+      symbolSize: 60,
+      symbol:
+        "image://../Common/extensions/missionsafety/ui/missionsafety/images/arrow_blue_up.png",
+      symbolRotate: 0,
+      data: [],
+      label: {
+        show: true,
+        fontSize: 15,
+        rotate: 0,
+      },
+      silent: true,
+      zlevel: 10,
+      z: 10,
+    },
+    {
+      id: "current",
+      type: "scatter",
+      coordinateSystem: "polar",
+      symbolSize: 60,
+      symbol:
+        "image://../Common/extensions/missionsafety/ui/missionsafety/images/arrow_green_up.png",
+      symbolRotate: 0,
+      data: [],
+      label: {
+        show: true,
+        fontSize: 15,
+        rotate: 0,
+      },
+      silent: true,
+      zlevel: 10,
+      z: 10,
+    },
+    {
+      id: "wind",
+      type: "scatter",
+      coordinateSystem: "polar",
+      symbolSize: 60,
+      symbol:
+        "image://../Common/extensions/missionsafety/ui/missionsafety/images/arrow_orange_up.png",
+      symbolRotate: 0,
+      data: [],
+      label: {
+        show: true,
+        fontSize: 15,
+        rotate: 0,
+      },
+      silent: true,
+      zlevel: 10,
+      z: 10,
+    },
+  ],
 };

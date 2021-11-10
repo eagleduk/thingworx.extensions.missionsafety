@@ -21,8 +21,8 @@ TW.Runtime.Widgets.missionsafety_movable = function () {
       "../../Common/extensions/missionsafety/ui/missionsafety_movable/js/movable/latlon-spherical.js"
     );
 
-    const [a] = inputs.shift();
-    const current = new LatLon(a[1], a[0]);
+    const [currentLon, currentLat] = inputs.shift();
+    const current = new LatLon(currentLat, currentLon);
 
     const result = inputs.map((array) => {
       return array.map(([lon, lat]) => {
