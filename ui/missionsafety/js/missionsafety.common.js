@@ -29,8 +29,8 @@ const chart = {
     text: "Current Situation",
     subtext: "0",
     textAlign: "center",
-    right: -60,
-    bottom: 20,
+    right: -80,
+    bottom: 0,
     subtextStyle: {
       fontSize: 80,
       color: "green",
@@ -43,7 +43,7 @@ const chart = {
     orient: "vertical",
     icon: "circle",
     left: 10,
-    bottom: 20,
+    bottom: 10,
   },
   polar: [
     {
