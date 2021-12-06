@@ -27,9 +27,36 @@ TW.Runtime.Widgets.missionsafety = function () {
   this.updateProperty = function (updatePropertyInfo) {
     if (updatePropertyInfo.TargetProperty === "DATA") {
       const datas = updatePropertyInfo.RawDataFromInvoke;
-      console.log(datas);
 
-      if (datas) this.missionChart.setOption(datas, { replaceMerge: "series" });
+      const maxY = this.getProperty("maxY");
+      const scaleX = this.getProperty("scaleX");
+      const scaleY = this.getProperty("scaleY");
+
+      if (datas) {
+        (datas.radiusAxis = [
+          {
+            max: maxY / scaleY,
+            axisLabel: {
+              formatter: (value, index) => {
+                return value * scaleY + " NM";
+              },
+            },
+          },
+          {
+            max: maxY / scaleY,
+          },
+        ]),
+          (datas.angleAxis = [{ max: 360 / scaleX }, { max: 360 / scaleX }]);
+
+        this.missionChart.setOption(datas, { replaceMerge: "series" });
+      }
+    } else if (
+      updatePropertyInfo.TargetProperty === "maxY" ||
+      updatePropertyInfo.TargetProperty === "scaleX" ||
+      updatePropertyInfo.TargetProperty === "scaleY"
+    ) {
+      const value = updatePropertyInfo.RawSinglePropertyValue;
+      this.setProperty(updatePropertyInfo.TargetProperty, value);
     }
   };
 
@@ -39,10 +66,4 @@ TW.Runtime.Widgets.missionsafety = function () {
       height,
     });
   };
-
-  function getData(datas) {
-    console.log("getData... ", datas);
-    this.missionChart.setOption(datas, { replaceMerge: "series" });
-    console.log(this.missionChart.getOption());
-  }
 };

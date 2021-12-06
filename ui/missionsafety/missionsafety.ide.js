@@ -11,6 +11,21 @@ TW.IDE.Widgets.missionsafety = function () {
       isContainer: true,
       supportsAutoResize: true,
       properties: {
+        maxY: {
+          baseType: "INTEGER",
+          defaultValue: 100,
+          isBindingTarget: true,
+        },
+        scaleX: {
+          baseType: "INTEGER",
+          defaultValue: 10,
+          isBindingTarget: true,
+        },
+        scaleY: {
+          baseType: "INTEGER",
+          defaultValue: 5,
+          isBindingTarget: true,
+        },
         DATA: {
           baseType: "JSON",
           isBindingTarget: true,
@@ -20,7 +35,7 @@ TW.IDE.Widgets.missionsafety = function () {
   };
 
   this.afterSetProperty = function (name, value) {
-    var refreshHtml = false;
+    let refreshHtml = false;
     return refreshHtml;
   };
 
@@ -35,17 +50,13 @@ TW.IDE.Widgets.missionsafety = function () {
     const id = this.getProperty("Id");
     const width = this.getProperty("Width");
     const height = this.getProperty("Height");
-    console.log(this, width, height);
 
     const dom = this.jqElement[0];
-    console.log(dom);
-    // const dom = document.getElementById(id);
+
     const myChart = echarts.init(dom, null, {
       renderer: "svg",
-      // width: undefined,
-      // height: undefined,
     });
-    console.log(myChart);
+
     myChart.setOption(chart);
   };
 };
