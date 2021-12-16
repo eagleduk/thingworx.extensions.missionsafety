@@ -5,7 +5,7 @@ TW.IDE.Widgets.missionsafety_movable = function () {
 
   this.widgetProperties = function () {
     return {
-      name: "missionsafety movable",
+      name: "Movable",
       description: "",
       category: ["Common"],
       properties: {
