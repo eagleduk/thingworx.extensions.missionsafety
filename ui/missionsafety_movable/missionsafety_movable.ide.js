@@ -49,7 +49,7 @@ TW.IDE.Widgets.missionsafety_movable = function () {
     return (
       "<div class='widget-content widget-missionsafety_movable'>" +
       "<span class='missionsafety-movable-property'>" +
-      "TEST" +
+      "Movable" +
       "</span>" +
       "</div>"
     );
